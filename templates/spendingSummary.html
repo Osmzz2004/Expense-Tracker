@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;   
+            align-items: center;       
+            text-align: center;
+            background-color: lightgray;
+        }
+
+            .top-container { 
+            background: white; 
+            margin-bottom: 20px; 
+            margin-top: 1px;
+            width: 100%;
+            padding: 10px;
+            text-align: center; 
+        }
+        .btn{
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+    }
+        img {
+            max-width: 90vw;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+<div class="top-container">
+    <h1>Expense Summary</h1>
+    <button class="btn" id="btn">Go back to menu</button>
+</div>
+    <label for="months">View past:</label>
+    <select id="months">
+        <option value="3">3 months</option>
+        <option value="6">6 months</option>
+        <option value="12">12 months</option>
+    </select>
+    <button style="margin-top: 8px; margin-bottom: 8px;" id="loadBtn">Load Dashboard</button>
+
+    <div>
+        <img id="chartImg" src="/spendingSummaryChart?months=3" alt="Expense Chart">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+        
+            $("#btn").click(function(){
+            window.location.href = "{{ url_for('index') }}";
+        });
+
+    $('#loadBtn').click(function() {
+        var months = $('#months').val();
+
+        $.ajax({
+            url: '/spendingSummaryChart',
+            type: 'GET',
+            data: { months: months },  
+            xhrFields: {
+                responseType: 'blob'  
+            },
+            success: function(data) {
+                var url = URL.createObjectURL(data);
+                $('#chartImg').attr('src', url);
+            },
+            error: function() {
+                alert('Error loading chart!');
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>

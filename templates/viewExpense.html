@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Expenses</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgray;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid gray;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: rgb(35, 35, 35);
+            color: white;
+        }
+        .btn {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Expenses</h1>
+
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Category</th>
+        </tr>
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e.expense_description }}</td>
+            <td>{{ e.amount }}</td>
+            <td>{{ e.expense_date }}</td>
+            <td>{{ e.category }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+   <button class="btn" id="menuBtn">Go back to menu</button>
+   
+    <script>
+    $(document).ready(function(){
+        $("#menuBtn").hover(
+            function() { $(this).css("background-color", "darkblue"); }, 
+            function() { $(this).css("background-color", "blue"); }
+        );
+
+        $("#menuBtn").click(function() { 
+            window.location.href = "{{ url_for('index') }}";
+
+    });
+});
+    </script>
+</body>
+</html>

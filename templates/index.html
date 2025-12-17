@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - Expense Tracker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: lightblue;
+            margin: 0;
+            padding: 0;
+        }
+
+        .welcome-container { 
+            background: white; 
+            margin: 0; 
+            padding: 10px;
+            text-align: center; 
+        }
+
+        .btn-Container {
+            position: fixed;       
+            top: 0;                
+            left: 0;               
+            height: 100vh;        
+            width: 180px;         
+            background: black;
+            padding-top: 120px;   
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btnLogout {
+            display: inline-block;
+            border-radius: 10px;
+            margin-top: 5px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="welcome-container">
+    <h1>Welcome, {{ session['username'] }}!</h1>
+
+
+    <button class="btnLogout" id="logoutBtn">Logout</button>
+</div>
+
+<div class="btn-Container">
+    <button class="btn" id="addExpenseBtn">Add Expenses</button>
+
+<button class="btn" id="updateExpenseBtn">Update Expenses</button>
+
+<button class="btn" id="viewExpenseBtn">View Expenses</button>
+
+<button class="btn" id="deleteExpenseBtn">Delete Expenses</button>
+
+
+
+</div>
+<button class="btn" id="spendingSummaryBtn" style="
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    width: 300px;
+">
+    Spending Summary
+</button>
+<script>
+    $(document).ready(function() {
+        
+        $("#logoutBtn").click(function() {
+            window.location.href = "{{ url_for('logout') }}";
+        });
+        $("#logoutBtn").hover(
+            function() { $(this).css("background-color", "darkblue"); }, 
+            function() { $(this).css("background-color", "blue"); }
+        );
+
+       
+        $("#addExpenseBtn").click(function() {
+            window.location.href = "{{ url_for('addExpense') }}";
+        });
+        $("#addExpenseBtn").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+
+                $("#deleteExpenseBtn").click(function() {
+            window.location.href = "{{ url_for('deleteExpense') }}";
+        });
+        $("#deleteExpenseBtn").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+
+            $("#updateExpenseBtn").click(function() {
+            window.location.href = "{{ url_for('updateExpense') }}";
+        });
+        $("#updateExpenseBtn").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+
+            $("#viewExpenseBtn").click(function() {
+            window.location.href = "{{ url_for('viewExpense') }}";
+        });
+        $("#viewExpenseBtn").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+
+                $("#spendingSummaryBtn").click(function() {
+            window.location.href = "{{ url_for('spendingSummary') }}";
+        });
+        $("#spendingSummaryBtn").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+    });
+</script>
+
+</body>
+</html>

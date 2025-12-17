@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+
+    .form-container{
+            max-width: 420px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+    }
+
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid lightgray;
+            border-radius: 15px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        /* Submit button */
+        .expbtn{
+            margin-left: 120px;
+            padding: 12px;
+            background-color: red; 
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .menubtn{
+            padding: 12px;
+            background-color: blue; 
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+    <form method="POST" action="addExpense">
+        <h1 style="text-align: center;">Add New Expense</h1>
+
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" placeholder="e.g., Food, Rent">
+
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" id="amount" placeholder="Enter amount">
+
+        <label for="expense_date">Date</label>
+        <input type="date" name="expense_date" id="expense_date">
+
+        <label for="expense_description">Description</label>
+        <input type="text" name="expense_description" id="expense_description" placeholder="Details about expense">
+ 
+        <button type="button" class="menubtn" id="btn1">Go back to menu</button>
+        <button class="expbtn" id="btn2" type="submit">Add Expense</button>
+    </form>
+    </div>
+
+    <script>
+
+    $(document).ready(function(){
+        $("#btn1").hover(
+            function() { $(this).css("background-color", "darkblue"); }, 
+            function() { $(this).css("background-color", "blue"); }
+        );
+
+                $("#btn2").hover(
+            function() { $(this).css("background-color", "darkred"); }, 
+            function() { $(this).css("background-color", "red"); }
+        );
+
+                $("#btn1").click(function(){
+            window.location.href = "{{ url_for('index') }}";
+        });
+
+
+            if("{{msg}}") {
+        alert("{{msg}}");
+    }
+    });
+</script>
+</body>
+</html>
